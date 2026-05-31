@@ -327,7 +327,6 @@ export default function HabitsPage() {
               style={{
                 ...inputStyle,
                 marginTop: 10,
-                fontSize: 12,
                 color: "#666",
               }}
             />
@@ -927,7 +926,7 @@ const inputStyle: React.CSSProperties = {
   borderRadius: 10,
   padding: "11px 13px",
   color: "#e2e8f0",
-  fontSize: 14,
+  fontSize: 16,
   fontFamily: "'Courier New', monospace",
   outline: "none",
 };
