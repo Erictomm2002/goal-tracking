@@ -131,12 +131,12 @@ export default function HabitsPage() {
         input[type=date]::-webkit-calendar-picker-indicator { filter: invert(0.4); }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
         @media (max-width: 767px) {
-          [style*="font-size: 13px"] { font-size: 19px !important; }
-          [style*="font-size: 12px"] { font-size: 18px !important; }
-          [style*="font-size: 11px"] { font-size: 17px !important; }
-          [style*="font-size: 10px"] { font-size: 16px !important; }
-          [style*="font-size: 9px"] { font-size: 15px !important; }
-          [style*="font-size: 8px"] { font-size: 14px !important; }
+          [style*="font-size: 13px"] { font-size: 17px !important; }
+          [style*="font-size: 12px"] { font-size: 16px !important; }
+          [style*="font-size: 11px"] { font-size: 15px !important; }
+          [style*="font-size: 10px"] { font-size: 14px !important; }
+          [style*="font-size: 9px"] { font-size: 13px !important; }
+          [style*="font-size: 8px"] { font-size: 12px !important; }
         }
       `}</style>
 
