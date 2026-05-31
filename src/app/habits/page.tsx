@@ -127,9 +127,17 @@ export default function HabitsPage() {
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         @keyframes fadeSlide { from{opacity:0;transform:translateX(-50%) translateY(-10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
-        input::placeholder { color: #444; }
+        input::placeholder { color: #64748b; }
         input[type=date]::-webkit-calendar-picker-indicator { filter: invert(0.4); }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+        @media (max-width: 767px) {
+          [style*="font-size: 13px"] { font-size: 15px !important; }
+          [style*="font-size: 12px"] { font-size: 14px !important; }
+          [style*="font-size: 11px"] { font-size: 13px !important; }
+          [style*="font-size: 10px"] { font-size: 12px !important; }
+          [style*="font-size: 9px"] { font-size: 11px !important; }
+          [style*="font-size: 8px"] { font-size: 10px !important; }
+        }
       `}</style>
 
       {/* ── Setup overlay ── */}
@@ -203,14 +211,14 @@ export default function HabitsPage() {
                 >
                   CHECK-IN HÔM NAY
                 </div>
-                <div style={{ fontSize: 11, color: "#444" }}>{todayStr()}</div>
+                <div style={{ fontSize: 11, color: "#64748b" }}>{todayStr()}</div>
               </div>
               <button
                 onClick={() => setShowCheckin(false)}
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#555",
+                  color: "#64748b",
                   fontSize: 20,
                   cursor: "pointer",
                   fontFamily: "inherit",
@@ -248,7 +256,7 @@ export default function HabitsPage() {
                     <div
                       style={{
                         fontSize: 9,
-                        color: "#3a3a4a",
+                        color: "#64748b",
                         letterSpacing: 1,
                       }}
                     >
@@ -280,7 +288,7 @@ export default function HabitsPage() {
                 alignItems: "center",
               }}
             >
-              <div style={{ fontSize: 12, color: "#aaa" }}>
+              <div style={{ fontSize: 12, color: "#cbd5e1" }}>
                 {habitsChecked}/{activeHabits.length} hôm nay
               </div>
               <div
@@ -299,7 +307,7 @@ export default function HabitsPage() {
                 style={{
                   fontSize: 9,
                   letterSpacing: 2,
-                  color: "#555",
+                  color: "#64748b",
                   marginBottom: 6,
                 }}
               >
@@ -327,7 +335,7 @@ export default function HabitsPage() {
               style={{
                 ...inputStyle,
                 marginTop: 10,
-                color: "#666",
+                color: "#94a3b8",
               }}
             />
 
@@ -363,7 +371,7 @@ export default function HabitsPage() {
               &ldquo;Tiết kiệm thông minh, chạy số máu lửa, cạnh tranh hết sức. Để được như vậy thì hãy biết cách chi tiêu, thể thao, sinh hoạt để chăm sóc bản thân, dành thời gian để tìm các phương án kiếm tiền mới, tích lũy năng lượng từ những hành động nhỏ hàng ngày để tạo ra giá trị, tài sản.&rdquo;
             </div>
             <button onClick={() => setShowMotivation(false)}
-              style={{ ...btnOrangeStyle, marginTop: 16, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "#aaa" }}>
+              style={{ ...btnOrangeStyle, marginTop: 16, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "#cbd5e1" }}>
               BẮT ĐẦU NGAY →
             </button>
           </div>
@@ -464,7 +472,7 @@ export default function HabitsPage() {
               marginBottom: 16,
             }}
           >
-            <div style={{ fontSize: 13, color: "#aaa", marginBottom: 12 }}>
+            <div style={{ fontSize: 13, color: "#cbd5e1", marginBottom: 12 }}>
               CÀI ĐẶT
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -553,7 +561,7 @@ export default function HabitsPage() {
                 style={{
                   fontSize: 9,
                   letterSpacing: 2,
-                  color: "#555",
+                  color: "#64748b",
                   marginBottom: 14,
                 }}
               >
@@ -562,24 +570,24 @@ export default function HabitsPage() {
               <ProgressBattery percent={fundPct} />
               <div style={{ display: "flex", gap: 16, marginTop: 14 }}>
                 <div style={{ flex: 1, textAlign: "center" }}>
-                  <div style={{ fontSize: 8, letterSpacing: 2, color: "#555", marginBottom: 2 }}>
+                  <div style={{ fontSize: 8, letterSpacing: 2, color: "#64748b", marginBottom: 2 }}>
                     TIỀN TIẾT KIỆM
                   </div>
                   <div style={{ fontSize: 13, color: "#F97316", fontWeight: 800 }}>
                     {fmt(totalFund)}
                   </div>
-                  <div style={{ fontSize: 10, color: "#444" }}>
+                  <div style={{ fontSize: 10, color: "#64748b" }}>
                     / {reward ? fmt(reward.price) : "—"}
                   </div>
                 </div>
                 <div style={{ flex: 1, textAlign: "center" }}>
-                  <div style={{ fontSize: 8, letterSpacing: 2, color: "#555", marginBottom: 2 }}>
+                  <div style={{ fontSize: 8, letterSpacing: 2, color: "#64748b", marginBottom: 2 }}>
                     DEADLINE
                   </div>
                   <div style={{ fontSize: 13, fontWeight: 800, color: "#60a5fa" }}>
                     {daysLeft} ngày
                   </div>
-                  <div style={{ fontSize: 10, color: "#444" }}>
+                  <div style={{ fontSize: 10, color: "#64748b" }}>
                     {reward?.deadline?.slice(0, 10) || "—"}
                   </div>
                 </div>
@@ -589,7 +597,7 @@ export default function HabitsPage() {
                   marginTop: 12,
                   textAlign: "center",
                   fontSize: 10,
-                  color: "#555",
+                  color: "#64748b",
                   background: "rgba(249,115,22,0.06)",
                   borderRadius: 30,
                   padding: "5px 10px",
@@ -610,7 +618,7 @@ export default function HabitsPage() {
                   marginBottom: 10,
                 }}
               >
-                <div style={{ fontSize: 9, letterSpacing: 2, color: "#555" }}>
+                <div style={{ fontSize: 9, letterSpacing: 2, color: "#64748b" }}>
                   KPI THÓI QUEN THÁNG NÀY
                 </div>
                 <div
@@ -651,7 +659,7 @@ export default function HabitsPage() {
                   marginTop: 8,
                 }}
               >
-                <div style={{ fontSize: 10, color: "#555" }}>
+                <div style={{ fontSize: 10, color: "#64748b" }}>
                   {goodDays}/{logs.length} ngày đạt KPI
                 </div>
                 <div
@@ -687,7 +695,7 @@ export default function HabitsPage() {
                     padding: "12px 8px",
                   }}
                 >
-                  <div style={{ fontSize: 8, letterSpacing: 1, color: "#444" }}>
+                  <div style={{ fontSize: 8, letterSpacing: 1, color: "#64748b" }}>
                     {label}
                   </div>
                   <div
@@ -716,7 +724,7 @@ export default function HabitsPage() {
                 style={{
                   fontSize: 9,
                   letterSpacing: 2,
-                  color: "#555",
+                  color: "#64748b",
                   marginBottom: 12,
                 }}
               >
@@ -726,7 +734,7 @@ export default function HabitsPage() {
                 <div
                   style={{
                     textAlign: "center",
-                    color: "#444",
+                    color: "#64748b",
                     fontSize: 12,
                     padding: "16px 0",
                   }}
@@ -780,7 +788,7 @@ export default function HabitsPage() {
                                     : "#ef4444",
                             }}
                           />
-                          <div style={{ fontSize: 11, color: "#888" }}>
+                          <div style={{ fontSize: 11, color: "#94a3b8" }}>
                             {log.date}
                           </div>
                           <div
@@ -797,7 +805,7 @@ export default function HabitsPage() {
                           <div
                             style={{
                               fontSize: 10,
-                              color: "#444",
+                              color: "#64748b",
                               marginTop: 3,
                               paddingLeft: 13,
                             }}
@@ -818,10 +826,10 @@ export default function HabitsPage() {
                             +{fmt(log.saving)}
                           </div>
                         ) : (
-                          <div style={{ fontSize: 11, color: "#333" }}>—</div>
+                          <div style={{ fontSize: 11, color: "#475569" }}>—</div>
                         )}
                         {log.saving > 0 && reward && (
-                          <div style={{ fontSize: 9, color: "#444" }}>
+                          <div style={{ fontSize: 9, color: "#64748b" }}>
                             {Math.round((log.saving / reward.price) * 100)}% mục
                             tiêu
                           </div>
@@ -846,7 +854,7 @@ export default function HabitsPage() {
                 style={{
                   fontSize: 9,
                   letterSpacing: 2,
-                  color: "#555",
+                  color: "#64748b",
                   marginBottom: 12,
                 }}
               >
@@ -879,7 +887,7 @@ export default function HabitsPage() {
                     style={{ display: "flex", alignItems: "center", gap: 8 }}
                   >
                     <span style={{ fontSize: 14 }}>{ok ? "✅" : "🔒"}</span>
-                    <div style={{ fontSize: 12, color: "#aaa" }}>{label}</div>
+                    <div style={{ fontSize: 12, color: "#cbd5e1" }}>{label}</div>
                   </div>
                   <div
                     style={{
@@ -896,7 +904,7 @@ export default function HabitsPage() {
                 <div
                   style={{
                     fontSize: 10,
-                    color: "#444",
+                    color: "#64748b",
                     marginTop: 6,
                     textAlign: "center",
                   }}
@@ -949,7 +957,7 @@ const btnOrangeStyle: React.CSSProperties = {
 const ghostBtnStyle: React.CSSProperties = {
   background: "none",
   border: "none",
-  color: "#555",
+  color: "#64748b",
   fontSize: 11,
   cursor: "pointer",
   fontFamily: "'Courier New', monospace",

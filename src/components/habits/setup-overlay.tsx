@@ -71,7 +71,7 @@ export function SetupOverlay({ onDone, initial }: Props) {
             <div style={{ fontSize: 22, fontWeight: 900, color: "#fff", marginBottom: 4 }}>
               Mục tiêu của bạn?
             </div>
-            <div style={{ fontSize: 12, color: "#555", marginBottom: 20, lineHeight: 1.6 }}>
+            <div style={{ fontSize: 12, color: "#64748b", marginBottom: 20, lineHeight: 1.6 }}>
               Mọi thói quen đều dẫn về một điểm duy nhất.
             </div>
 
@@ -81,7 +81,7 @@ export function SetupOverlay({ onDone, initial }: Props) {
               { label: "DEADLINE", val: deadline, set: setDeadline, type: "date" as const },
             ].map(({ label, val, set, ph, inputMode, type }) => (
               <div key={label} style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 9, letterSpacing: 2, color: "#555", marginBottom: 6 }}>{label}</div>
+                <div style={{ fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 6 }}>{label}</div>
                 <input value={val} onChange={e => set(e.target.value)}
                   inputMode={inputMode as "text" | "numeric" | "decimal" | undefined} type={type || "text"} placeholder={ph}
                   style={inputStyle} />
@@ -89,7 +89,7 @@ export function SetupOverlay({ onDone, initial }: Props) {
             ))}
 
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: 9, letterSpacing: 2, color: "#555", marginBottom: 6 }}>
+              <div style={{ fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 6 }}>
                 LINK ẢNH (tuỳ chọn)
               </div>
               <input value={image} onChange={e => setImage(e.target.value)}
@@ -113,7 +113,7 @@ export function SetupOverlay({ onDone, initial }: Props) {
             <div style={{ fontSize: 22, fontWeight: 900, color: "#fff", marginBottom: 4 }}>
               Thói quen của bạn?
             </div>
-            <div style={{ fontSize: 12, color: "#555", marginBottom: 20, lineHeight: 1.6 }}>
+            <div style={{ fontSize: 12, color: "#64748b", marginBottom: 20, lineHeight: 1.6 }}>
               Thêm các thói quen bạn muốn theo dõi.
             </div>
 
@@ -147,16 +147,16 @@ export function SetupOverlay({ onDone, initial }: Props) {
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>{h.title}</div>
                       {h.subtitle && (
-                        <div style={{ fontSize: 10, color: "#888", marginTop: 2 }}>{h.subtitle}</div>
+                        <div style={{ fontSize: 10, color: "#94a3b8", marginTop: 2 }}>{h.subtitle}</div>
                       )}
                       {h.description && (
-                        <div style={{ fontSize: 9, color: "#666", marginTop: 3, lineHeight: 1.4, whiteSpace: "pre-wrap", maxHeight: 32, overflow: "hidden" }}>
+                        <div style={{ fontSize: 9, color: "#94a3b8", marginTop: 3, lineHeight: 1.4, whiteSpace: "pre-wrap", maxHeight: 32, overflow: "hidden" }}>
                           {h.description}
                         </div>
                       )}
                     </div>
                     <span onClick={() => removeHabit(h.title)}
-                      style={{ cursor: "pointer", color: "#666", fontSize: 16, opacity: 0.6 }}>×</span>
+                      style={{ cursor: "pointer", color: "#94a3b8", fontSize: 16, opacity: 0.6 }}>×</span>
                   </div>
                 ))}
               </div>
@@ -165,7 +165,7 @@ export function SetupOverlay({ onDone, initial }: Props) {
             <div style={{
               marginTop: 16, padding: "10px 12px", borderRadius: 10,
               background: "rgba(255,255,255,0.03)",
-              fontSize: 11, color: "#666",
+              fontSize: 11, color: "#94a3b8",
             }}>
               Đã thêm: <strong style={{ color: "#F97316" }}>{habits.length}</strong> thói quen
             </div>
@@ -205,7 +205,7 @@ const btnOrangeStyle: React.CSSProperties = {
 };
 
 const ghostBtnStyle: React.CSSProperties = {
-  background: "none", border: "none", color: "#555",
+  background: "none", border: "none", color: "#64748b",
   fontSize: 11, cursor: "pointer",
   fontFamily: "'Courier New', monospace", padding: "8px 16px",
 };
