@@ -11,6 +11,8 @@ import { HabitBreakdown } from "@/components/habits/charts";
 import { TaskList } from "@/components/habits/task-list";
 import { SetupOverlay } from "@/components/habits/setup-overlay";
 import type { Reward, CheckInLog, Toast } from "@/types/habit";
+import { FinanceTab } from "@/components/finance/finance-tab";
+import { ExpenseSummaryCard } from "@/components/finance/expense-summary-card";
 
 export default function HabitsPage() {
   const { reward, isLoading: rewardLoading, saveReward, deleteReward } = useReward();
@@ -23,6 +25,7 @@ export default function HabitsPage() {
   const [showSetup, setShowSetup] = useState(false);
   const [showCheckin, setShowCheckin] = useState(false);
   const [showMotivation, setShowMotivation] = useState(false);
+  const [activeTab, setActiveTab] = useState<"goal" | "finance">("goal");
   const isMobile = useMobile();
 
   const isLoading = rewardLoading || logsLoading;
@@ -463,6 +466,66 @@ export default function HabitsPage() {
           </div>
         </div>
 
+        {/* ── Tab bar ── */}
+        <div
+          style={{
+            display: "flex",
+            gap: 4,
+            marginBottom: 14,
+            background: "rgba(255,255,255,0.03)",
+            borderRadius: 12,
+            padding: 3,
+          }}
+        >
+          <button
+            onClick={() => setActiveTab("goal")}
+            style={{
+              flex: 1,
+              padding: "10px",
+              borderRadius: 10,
+              border: "none",
+              background:
+                activeTab === "goal"
+                  ? "linear-gradient(135deg,#ea580c,#F97316)"
+                  : "transparent",
+              color: activeTab === "goal" ? "#fff" : "#94a3b8",
+              fontWeight: activeTab === "goal" ? 800 : 400,
+              fontSize: 12,
+              fontFamily: "'Courier New', monospace",
+              cursor: "pointer",
+              letterSpacing: 1,
+              transition: "all 0.2s",
+            }}
+          >
+            🎯 MỤC TIÊU
+          </button>
+          <button
+            onClick={() => setActiveTab("finance")}
+            style={{
+              flex: 1,
+              padding: "10px",
+              borderRadius: 10,
+              border: "none",
+              background:
+                activeTab === "finance"
+                  ? "linear-gradient(135deg,#ea580c,#F97316)"
+                  : "transparent",
+              color: activeTab === "finance" ? "#fff" : "#94a3b8",
+              fontWeight: activeTab === "finance" ? 800 : 400,
+              fontSize: 12,
+              fontFamily: "'Courier New', monospace",
+              cursor: "pointer",
+              letterSpacing: 1,
+              transition: "all 0.2s",
+            }}
+          >
+            💰 TÀI CHÍNH
+          </button>
+        </div>
+
+        {activeTab === "goal" ? (
+        <div style={{ display: "contents" }}>
+
           {/* ── Settings dropdown ── */}
         {showReset && (
           <div
@@ -718,6 +781,7 @@ export default function HabitsPage() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <ExpenseSummaryCard />
             <TaskList habits={activeHabits} />
             <div style={cardStyle}>
               <div
@@ -915,8 +979,12 @@ export default function HabitsPage() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      ) : (
+        <FinanceTab />
+      )}
     </div>
+  </div>
   );
 }
 
