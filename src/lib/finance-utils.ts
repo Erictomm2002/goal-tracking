@@ -1,23 +1,24 @@
 import type { ExpenseCategory, Expense } from "@/types/finance";
+import { localDateStr } from "./habit-utils";
 
 export function startOfWeek(d = new Date()): string {
   const date = new Date(d);
   const day = date.getDay();
   const diff = day === 0 ? -6 : 1 - day;
   date.setDate(date.getDate() + diff);
-  return date.toISOString().slice(0, 10);
+  return localDateStr(date);
 }
 
 export function startOfMonth(d = new Date()): string {
   const date = new Date(d);
   date.setDate(1);
-  return date.toISOString().slice(0, 10);
+  return localDateStr(date);
 }
 
 export function endOfMonth(d = new Date()): string {
   const date = new Date(d);
   date.setMonth(date.getMonth() + 1, 0);
-  return date.toISOString().slice(0, 10);
+  return localDateStr(date);
 }
 
 export function periodStart(cat: ExpenseCategory): string {

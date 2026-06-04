@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import type { Expense, ExpenseCategory } from "@/types/finance";
-import { fmt } from "@/lib/habit-utils";
+import { fmt, localDateStr } from "@/lib/habit-utils";
 
 const COLORS = ["#F97316", "#22c55e", "#60a5fa", "#a855f7", "#ec4899", "#eab308", "#14b8a6", "#f97316"];
 
@@ -16,7 +16,7 @@ export function FinanceCharts({ expenses, categories }: Props) {
     return Array.from({ length: 7 }, (_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - (6 - i));
-      const ds = d.toISOString().slice(0, 10);
+      const ds = localDateStr(d);
       const total = expenses
         .filter((e) => e.date === ds)
         .reduce((s, e) => s + e.amount, 0);

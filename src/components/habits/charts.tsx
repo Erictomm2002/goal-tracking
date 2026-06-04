@@ -1,11 +1,12 @@
 "use client";
 
 import type { CheckInLog, Habit } from "@/types/habit";
+import { localDateStr } from "@/lib/habit-utils";
 
 function MiniBarChart({ logs }: { logs: CheckInLog[] }) {
   const last7 = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(); d.setDate(d.getDate() - (6 - i));
-    const ds = d.toISOString().slice(0, 10);
+    const ds = localDateStr(d);
     const log = logs.find(l => l.date === ds);
     return { ds, pct: log ? log.donePct : null };
   });
