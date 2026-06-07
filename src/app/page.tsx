@@ -6,13 +6,21 @@ export default function Home() {
       <div className="text-center">
         <div className="text-[9px] tracking-[3px] text-[#F97316] mb-2">TRACKING APP</div>
         <h1 className="text-2xl font-black text-white mb-6">Chào mừng</h1>
-        <Link
-          href="/habits"
-          className="inline-block rounded-xl bg-gradient-to-r from-[#ea580c] to-[#F97316] px-8 py-4 text-sm font-black text-white tracking-wide no-underline"
-        >
-          MỞ APP QUẢN LÝ THÓI QUEN →
-        </Link>
-        <p className="mt-4 text-[11px] text-[#444]">Theo dõi thói quen, tích lũy quỹ, nhận thưởng.</p>
+        <div className="flex flex-col gap-3">
+          <Link
+            href="/habits"
+            className="inline-block rounded-xl bg-gradient-to-r from-[#ea580c] to-[#F97316] px-8 py-4 text-sm font-black text-white tracking-wide no-underline"
+          >
+            MỞ APP QUẢN LÝ THÓI QUEN →
+          </Link>
+          <Link
+            href="/crm"
+            className="inline-block rounded-xl bg-blue-600 px-8 py-4 text-sm font-black text-white tracking-wide no-underline"
+          >
+            MỞ CRM BÁN HÀNG →
+          </Link>
+        </div>
+        <p className="mt-4 text-[11px] text-[#444]">Theo dõi thói quen, tích lũy quỹ, quản lý khách hàng.</p>
       </div>
     </div>
   );

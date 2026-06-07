@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { fmt, todayStr } from "@/lib/habit-utils";
+import { fmt, todayStr, localDateStr } from "@/lib/habit-utils";
 import { useMobile } from "@/hooks/use-mobile";
 import { useReward } from "@/hooks/use-reward";
 import { useLogs } from "@/hooks/use-logs";
@@ -36,10 +36,27 @@ export default function HabitsPage() {
   const fundPct = reward
     ? Math.min(100, Math.max(0, (totalFund / reward.price) * 100))
     : 0;
-  const kpiPct =
-    logs.length > 0
-      ? Math.round(logs.reduce((a, l) => a + (l.donePct || 0), 0) / logs.length)
-      : 0;
+
+  const allDates = useMemo(() => {
+    if (logs.length === 0) return [];
+    const start = logs[0].date;
+    const end = todayStr();
+    const dates: string[] = [];
+    const cur = new Date(start);
+    const stop = new Date(end);
+    while (cur <= stop) {
+      dates.push(localDateStr(cur));
+      cur.setDate(cur.getDate() + 1);
+    }
+    return dates;
+  }, [logs]);
+
+  const totalDays = allDates.length;
+  const totalDonePct = allDates.reduce((sum, date) => {
+    const log = logs.find((l) => l.date === date);
+    return sum + (log?.donePct || 0);
+  }, 0);
+  const kpiPct = totalDays > 0 ? Math.round(totalDonePct / totalDays) : 0;
   const unlocked = !!(reward && kpiPct >= 80 && totalFund >= reward.price);
   const daysLeft = reward
     ? Math.max(
@@ -723,7 +740,7 @@ export default function HabitsPage() {
                 }}
               >
                 <div style={{ fontSize: 10, color: "#94a3b8" }}>
-                  {goodDays}/{logs.length} ngày đạt KPI
+                  {goodDays}/{totalDays} ngày đạt KPI
                 </div>
                 <div
                   style={{

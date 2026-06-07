@@ -8,12 +8,12 @@ import type { Expense } from "@/types/finance";
 
 const KEY = ["expenses"];
 
-export function useExpenses(fromDate: string, toDate: string) {
+export function useExpenses() {
   const qc = useQueryClient();
 
   const { data, isLoading } = useQuery<Expense[]>({
-    queryKey: [...KEY, fromDate, toDate],
-    queryFn: () => fetchExpenses(fromDate, toDate),
+    queryKey: KEY,
+    queryFn: fetchExpenses,
     staleTime: Infinity,
   });
 
@@ -27,9 +27,9 @@ export function useExpenses(fromDate: string, toDate: string) {
     mutationFn: deleteExpense,
     onMutate: async (id) => {
       await qc.cancelQueries({ queryKey: KEY });
-      const prev = qc.getQueryData<Expense[]>([...KEY, fromDate, toDate]);
+      const prev = qc.getQueryData<Expense[]>(KEY);
       if (prev) {
-        qc.setQueryData([...KEY, fromDate, toDate], prev.filter((e) => e.id !== id));
+        qc.setQueryData(KEY, prev.filter((e) => e.id !== id));
       }
     },
     onSettled: () => qc.invalidateQueries({ queryKey: KEY }),

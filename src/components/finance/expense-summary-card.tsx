@@ -3,14 +3,12 @@
 import { useCategories } from "@/hooks/use-categories";
 import { useExpenses } from "@/hooks/use-expenses";
 import { todayStr, fmt } from "@/lib/habit-utils";
-import { startOfMonth, endOfMonth, budgetPct, budgetRemaining } from "@/lib/finance-utils";
+import { budgetPct, budgetRemaining } from "@/lib/finance-utils";
 
 export function ExpenseSummaryCard() {
   const today = todayStr();
-  const from = startOfMonth();
-  const to = endOfMonth();
   const { categories } = useCategories();
-  const { expenses } = useExpenses(from, to);
+  const { expenses } = useExpenses();
 
   const todayExpenses = expenses.filter((e) => e.date === today);
   const todayTotal = todayExpenses.reduce((s, e) => s + e.amount, 0);

@@ -3,21 +3,23 @@
 import { useState } from "react";
 import { useCategories } from "@/hooks/use-categories";
 import { useExpenses } from "@/hooks/use-expenses";
-import { startOfMonth, endOfMonth } from "@/lib/finance-utils";
+import { useSavings } from "@/hooks/use-savings";
+import { useDeclarations } from "@/hooks/use-declarations";
 import { BudgetOverview } from "./budget-overview";
 import { CategoryForm } from "./category-form";
 import { ExpenseList } from "./expense-list";
 import { ExpenseQuickAdd } from "./expense-quickadd";
 import { FinanceCharts } from "./finance-charts";
 import { BudgetAlert } from "./budget-alert";
+import { SavingsCard } from "./savings-card";
+import { DeclarationCard } from "./declaration-card";
 import type { ExpenseCategory } from "@/types/finance";
 
 export function FinanceTab() {
   const { categories, isLoading: catLoading, saveCategory, removeCategory } = useCategories();
-  const today = new Date();
-  const from = startOfMonth(today);
-  const to = endOfMonth(today);
-  const { expenses, isLoading: expLoading, addExpense, removeExpense } = useExpenses(from, to);
+  const { expenses, isLoading: expLoading, addExpense, removeExpense } = useExpenses();
+  const { isLoading: savLoading, totalSaved, totalSpent, netSavings, spends, addSpending } = useSavings();
+  const { latest, isLoading: decLoading, declare } = useDeclarations();
 
   const [showForm, setShowForm] = useState(false);
   const [editCat, setEditCat] = useState<ExpenseCategory | undefined>();
@@ -45,12 +47,10 @@ export function FinanceTab() {
     }
   };
 
-  if (catLoading || expLoading) return null;
+  if (catLoading || expLoading || savLoading || decLoading) return null;
 
   return (
-    <div>
-      <BudgetAlert categories={categories} expenses={expenses} />
-
+    <>
       <div
         style={{
           display: "flex",
@@ -58,6 +58,18 @@ export function FinanceTab() {
           gap: 14,
         }}
       >
+        <BudgetAlert categories={categories} expenses={expenses} />
+
+        <DeclarationCard latest={latest} onDeclare={declare} />
+
+        <SavingsCard
+          totalSaved={totalSaved}
+          totalSpent={totalSpent}
+          netSavings={netSavings}
+          spends={spends}
+          onSpend={addSpending}
+        />
+
         <BudgetOverview
           categories={categories}
           expenses={expenses}
@@ -109,6 +121,6 @@ export function FinanceTab() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }

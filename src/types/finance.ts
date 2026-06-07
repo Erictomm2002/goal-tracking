@@ -20,3 +20,17 @@ export interface CategoryFormData {
   budget_amount: number;
   budget_period: "weekly" | "monthly";
 }
+
+export interface SavingsSpend {
+  id: number;
+  amount: number;
+  note: string;
+  date: string;
+}
+
+export interface FinanceDeclaration {
+  id: number;
+  cash: number;
+  bank: number;
+  date: string;
+}

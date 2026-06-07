@@ -1,5 +1,5 @@
 import { supabase } from "./client";
-import type { ExpenseCategory, Expense } from "@/types/finance";
+import type { ExpenseCategory, Expense, SavingsSpend, FinanceDeclaration } from "@/types/finance";
 
 /* ── Categories ── */
 
@@ -50,15 +50,10 @@ export async function removeCategory(id: number): Promise<void> {
 
 /* ── Expenses ── */
 
-export async function fetchExpenses(
-  fromDate: string,
-  toDate: string,
-): Promise<Expense[]> {
+export async function fetchExpenses(): Promise<Expense[]> {
   const { data, error } = await supabase
     .from("expenses")
     .select("*")
-    .gte("date", fromDate)
-    .lte("date", toDate)
     .order("date", { ascending: false })
     .order("id", { ascending: false });
 
@@ -95,6 +90,78 @@ export async function deleteExpense(id: number): Promise<void> {
   const { error } = await supabase.from("expenses").delete().eq("id", id);
   if (error) {
     console.error("deleteExpense error:", error);
+    throw error;
+  }
+}
+
+/* ── Savings Spending ── */
+
+export async function fetchSavingsSpends(): Promise<SavingsSpend[]> {
+  const { data, error } = await supabase
+    .from("savings_spends")
+    .select("*")
+    .order("date", { ascending: false })
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("fetchSavingsSpends error:", error);
+    throw error;
+  }
+  if (!data) return [];
+  return data.map((d) => ({
+    id: d.id,
+    amount: Number(d.amount),
+    note: d.note,
+    date: d.date,
+  }));
+}
+
+export async function insertSavingsSpend(
+  spend: Omit<SavingsSpend, "id">,
+): Promise<void> {
+  const { error } = await supabase.from("savings_spends").insert({
+    amount: spend.amount,
+    note: spend.note,
+    date: spend.date,
+  });
+  if (error) {
+    console.error("insertSavingsSpend error:", error);
+    throw error;
+  }
+}
+
+/* ── Finance Declarations ── */
+
+export async function fetchDeclarations(): Promise<FinanceDeclaration[]> {
+  const { data, error } = await supabase
+    .from("finance_declarations")
+    .select("*")
+    .order("date", { ascending: false })
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("fetchDeclarations error:", error);
+    throw error;
+  }
+  if (!data) return [];
+  return data.map((d) => ({
+    id: d.id,
+    cash: Number(d.cash),
+    bank: Number(d.bank),
+    date: d.date,
+  }));
+}
+
+export async function upsertDeclaration(
+  decl: Omit<FinanceDeclaration, "id"> & { date: string },
+): Promise<void> {
+  const { error } = await supabase.from("finance_declarations").insert({
+    cash: decl.cash,
+    bank: decl.bank,
+    date: decl.date,
+  });
+  if (error) {
+    console.error("upsertDeclaration error:", error);
     throw error;
   }
 }
